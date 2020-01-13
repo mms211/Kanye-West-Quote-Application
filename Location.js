@@ -3,8 +3,6 @@ $(document).ready(function () {
   var cuisines = "none";
   $("#cuisineSelect").click(function () {
     cuisines = $(this).val();
-    console.log("CUISINE SELECTED")
-    console.log(cuisines)
   });
   $("#cuisineSelect").click(function () {
     localStorage.value = cuisines
@@ -22,13 +20,10 @@ $(document).ready(function () {
   // $("#foodImg").empty()
   $(".leftContainer").remove()
 
-  console.log(cuisines)
   //Retrieve IP Address
   $(function getIP() {
     $.getJSON("https://api6.ipify.org?format=jsonp&callback=?",
       function (json) {
-        console.log(json.ip);
-        console.log(json)
         localStorage.address = (json.ip)
       }
     );
@@ -40,13 +35,10 @@ $(document).ready(function () {
     dataType: 'JSON',
   })
     .then(function (response) {
-      console.log(response.latitude)
-      console.log(response.longitude)
       localStorage.latitude = response.latitude
       localStorage.longitude = response.longitude
       var cityHeader = $("<h1>").html(response.city)
       cityHeader.addClass("cityHeader")
-      console.log(cityHeader)
       $(".cityHeadContainer").append(cityHeader)
 
     });
@@ -70,13 +62,11 @@ $(document).ready(function () {
       success: function (response) {
         var res = response.restaurants[Math.floor(Math.random() * 19)]
         var data = {}
-        console.log(res)
         data.name = res.restaurant.name
         data.location = res.restaurant.location.address
         data.avgCost = res.restaurant.average_cost_for_two
         data.number = res.restaurant.phone_numbers
         data.img = res.restaurant.featured_image
-        console.log(data.img)
         displayRes(data)
       },
       error: function (response) {
